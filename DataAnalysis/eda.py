@@ -260,9 +260,9 @@ class DataAnalysisVisualizer:
 
             # Set x-axis label with rotation if rotate_xlabel is True
             if rotate_xlabel:
-                ax.set_xlabel(columns, rotation=90)
+                ax.set_xlabel(column, rotation=90)
             else:
-                ax.set_xlabel(columns)
+                ax.set_xlabel(column)
 
             # Set title for the count plot
             ax.set_title(f"Count Plot for {column}")
