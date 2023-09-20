@@ -7,7 +7,7 @@ import warnings
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
-class DataAnalysisPlots:
+class DataAnalysisVisualizer:
     """
     A class providing visualization functions for data analysis using Seaborn and Matplotlib.
 
@@ -20,7 +20,14 @@ class DataAnalysisPlots:
     - None"""
 
     def draw_scatterplot(
-        self, data, x_columns, y_column, hue_column=None, figsize=(8, 6), figshape=None
+        self,
+        data,
+        x_columns,
+        y_column,
+        hue_column=None,
+        figsize=(8, 6),
+        figshape=None,
+        rotate_xlabel=False,
     ):
         """
         Create scatter plots for multiple x_columns against a single y_column using Seaborn.
@@ -32,6 +39,8 @@ class DataAnalysisPlots:
         - hue_column (str, optional): The column name to be used for coloring the points. Default is None.
         - figsize (tuple, optional): Figure size in inches (width, height). Default is (8, 6).
         - figshape (tuple, optional): Number of rows and columns for the subplot grid. Default is (len(x_columns), 1).
+        - rotate_xlabel (bool, optional): Whether to rotate x-axis labels by 90 degrees. Default is False.
+
 
         Example:
         draw_scatterplot(dataframe, ['x1', 'x2', 'x3'], 'y', hue_column='hue_column', figsize=(12, 6), figshape=(2, 2))
@@ -76,8 +85,12 @@ class DataAnalysisPlots:
             else:
                 sns.scatterplot(data=data, x=x_column, y=y_column, ax=ax)
 
-            # Set x-axis and y-axis labels
-            ax.set_xlabel(x_column)
+            # Set x-axis label with rotation if rotate_xlabel is True
+            if rotate_xlabel:
+                ax.set_xlabel(x_column, rotation=90)
+            else:
+                ax.set_xlabel(x_column)
+            # Set y-axis labels
             ax.set_ylabel(y_column)
 
             ax.set_title(f"Scatter Plot for {x_column}")
@@ -96,7 +109,14 @@ class DataAnalysisPlots:
         plt.show()
 
     def draw_histplot(
-        self, data, columns, hue_column=None, figsize=None, figshape=None, kde=True
+        self,
+        data,
+        columns,
+        hue_column=None,
+        figsize=None,
+        figshape=None,
+        kde=True,
+        rotate_xlabel=False,
     ):
         """
         Create histogram plots for specified columns in a DataFrame using Seaborn.
@@ -108,6 +128,8 @@ class DataAnalysisPlots:
         - figsize (tuple, optional): Figure size in inches (width, height). Default is None.
         - figshape (tuple, optional): Number of rows and columns for the subplot grid. Default is None.
         - kde (bool, optional): Whether to overlay Kernel Density Estimation (KDE) on the histograms. Default is True.
+        - rotate_xlabel (bool, optional): Whether to rotate x-axis labels by 90 degrees. Default is False.
+
 
         Example:
         draw_histplot(dataframe, ['column1', 'column2', 'column3'], hue_column='hue_column', figsize=(12, 6), figshape=(2, 2))
@@ -151,7 +173,13 @@ class DataAnalysisPlots:
                     kde=kde,
                 )
             else:
-                sns.histplot(data=data, x=column, ax=ax, kde=True)
+                sns.histplot(data=data, x=column, ax=ax, kde=kde)
+
+            # Set x-axis label with rotation if rotate_xlabel is True
+            if rotate_xlabel:
+                ax.set_xlabel(column, rotation=90)
+            else:
+                ax.set_xlabel(column)
 
             # Set title for the histogram
             ax.set_title(f"Histogram for {column}")
@@ -177,6 +205,7 @@ class DataAnalysisPlots:
         figsize=None,
         figshape=None,
         annotation=True,
+        rotate_xlabel=False,
     ):
         """
         Create count plots for specified columns in a DataFrame using Seaborn.
@@ -189,6 +218,8 @@ class DataAnalysisPlots:
         - figsize (tuple, optional): Figure size in inches (width, height). Default is None.
         - figshape (tuple, optional): Number of rows and columns for the subplot grid. Default is None.
         - annotation (bool, optional): Whether to annotate each bar with its count value. Default is True.
+        - rotate_xlabel (bool, optional): Whether to rotate x-axis labels by 90 degrees. Default is False.
+
 
         Example:
         draw_countplot(dataframe, ['column1', 'column2', 'column3'], hue_column='hue_column', figsize=(12, 6), figshape=(2, 2), annotation=False)
@@ -212,7 +243,7 @@ class DataAnalysisPlots:
         fig, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
 
         # Flatten axes for sequential access
-        axes = np.array(axes).flatten()
+        axes = axes.flatten()
 
         # Create count plots for each specified column
         for i, column in enumerate(columns):
@@ -226,6 +257,12 @@ class DataAnalysisPlots:
                 sns.countplot(data=data, x=column, hue=hue_column, ax=ax)
             else:
                 sns.countplot(data=data, x=column, ax=ax)
+
+            # Set x-axis label with rotation if rotate_xlabel is True
+            if rotate_xlabel:
+                ax.set_xlabel(columns, rotation=90)
+            else:
+                ax.set_xlabel(columns)
 
             # Set title for the count plot
             ax.set_title(f"Count Plot for {column}")
