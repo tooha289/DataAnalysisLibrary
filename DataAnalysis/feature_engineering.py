@@ -27,7 +27,7 @@ class DataFramePreprocessor(object):
         """Transforms each column of the DataFrame using copied transformers
         and returns the transformed DataFrame along with the fitted transformers.
 
-        Args:
+        Parameters:
            df: The DataFrame to perform the transformation on.
            transformers: The source transformers on which to perform the transformation operation.
            The transformer in question must have a 'fit_transform' function.
@@ -61,7 +61,7 @@ class DataFramePreprocessor(object):
         """Transforms each column of the DataFrame using copied transformers
         and returns the transformed DataFrame along with the fitted transformers.
 
-        Args:
+        Parameters:
            dataframe: The DataFrame to perform the transformation on.
            transformer: The source transformer on which to perform the transformation operation.
            The transformer in question must have a 'fit_transform' function.
@@ -125,21 +125,27 @@ class DataFramePreprocessor(object):
 
 class FeatureSelector(object):
     def __init__(self) -> None:
+        """
+        Initialize a FeatureSelector instance.
+
+        This class provides methods for feature selection and analysis.
+
+        Attributes:
+            _logger (logging.Logger): Logger for this class.
+        """
         self._logger = logging.getLogger(self.__class__.__name__)
 
     def get_permutation_importance(self, estimator, X, y):
-        """Returns a "permutation_importance" DataFrame.
+        """
+        Calculate permutation importance for features.
 
-        Args:
-            estimator : object
-            An estimator that has already been :term:`fitted` and is compatible
-            with :term:`scorer`.
+        Parameters:
+            estimator (object): A fitted estimator compatible with scorer.
+            X (ndarray or DataFrame): Input data with shape (n_samples, n_features).
+            y (array-like or None): Target values for supervised learning or None for unsupervised.
 
-            X : ndarray or DataFrame, shape (n_samples, n_features)
-                Data on which permutation importance will be computed.
-
-            y : array-like or None, shape (n_samples, ) or (n_samples, n_classes)
-                Targets for supervised or `None` for unsupervised.
+        Returns:
+            DataFrame: A DataFrame containing feature names and their permutation importances.
         """
         perm_importance = permutation_importance(estimator, X, y)
         pi = pd.DataFrame()
@@ -148,6 +154,16 @@ class FeatureSelector(object):
         return pi
 
     def get_vif_dataframe(self, formula, dataframe):
+        """
+        Calculate Variance Inflation Factor (VIF) for features.
+
+        Parameters:
+            formula (str): A formula specifying the model.
+            dataframe (DataFrame): Input data for the model.
+
+        Returns:
+            DataFrame: A DataFrame containing feature names and their VIF values.
+        """
         y, X = dmatrices(formula, dataframe, return_type="dataframe")
 
         vif = pd.DataFrame()
@@ -159,6 +175,16 @@ class FeatureSelector(object):
         return vif
 
     def vif_analysis(self, formula, dataframe):
+        """
+        Perform VIF analysis and print results.
+
+        Parameters:
+            formula (str): A formula specifying the model.
+            dataframe (DataFrame): Input data for the model.
+
+        Returns:
+            None
+        """
         while True:
             model = smf.ols(formula=formula, data=dataframe).fit()
             print(model.summary())
