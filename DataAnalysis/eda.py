@@ -65,7 +65,7 @@ class DataAnalysisVisualizer:
         fig, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
 
         # Flatten axes for sequential access
-        axes = axes.flatten()
+        axes = np.array(axes).flatten()
 
         # Create scatter plots for each x_column against y_column
         for i, x_column in enumerate(x_columns):
@@ -151,7 +151,7 @@ class DataAnalysisVisualizer:
         fig, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
 
         # Flatten axes for sequential access
-        axes = axes.flatten()
+        axes = np.array(axes).flatten()
 
         # Create histograms for each specified column
         for i, column in enumerate(columns):
@@ -241,7 +241,7 @@ class DataAnalysisVisualizer:
         fig, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
 
         # Flatten axes for sequential access
-        axes = axes.flatten()
+        axes = np.array(axes).flatten()
 
         # Create count plots for each specified column
         for i, column in enumerate(columns):
@@ -402,7 +402,7 @@ class DataAnalysisVisualizer:
         fig, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
 
         # Flatten axes for sequential access
-        axes = axes.flatten()
+        axes = np.array(axes).flatten()
 
         # Create box plots for each specified column
         for i, column in enumerate(columns):
