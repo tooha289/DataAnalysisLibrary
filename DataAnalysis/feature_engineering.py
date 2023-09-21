@@ -9,6 +9,10 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 from sklearn.inspection import permutation_importance
 import statsmodels.formula.api as smf
 
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning)
+
 
 class DataFramePreprocessor(object):
     """This class helps perform preprocessing on data frames.
@@ -207,6 +211,9 @@ class FeatureSelector(object):
                 formula.replace(find_str, "")
             elif formula.find(feature) != -1:
                 formula.replace(feature, "")
+                
+            print("=" * 40)
+            print("=" * 40)
 
     def __str__(self) -> str:
         return self.__repr__()
