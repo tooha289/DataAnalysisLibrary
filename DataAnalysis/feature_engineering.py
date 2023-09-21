@@ -139,7 +139,7 @@ class FeatureSelector(object):
         """
         self._logger = logging.getLogger(self.__class__.__name__)
 
-    def get_permutation_importance(self, estimator, X, y):
+    def get_permutation_importance(self, estimator, X, y, n_repeats=30):
         """
         Calculate permutation importance for features.
 
@@ -147,11 +147,13 @@ class FeatureSelector(object):
             estimator (object): A fitted estimator compatible with scorer.
             X (ndarray or DataFrame): Input data with shape (n_samples, n_features).
             y (array-like or None): Target values for supervised learning or None for unsupervised.
+            n_repeats (int, optional): The number of times to permute the data for calculating importances.
+                                    Default is 30.
 
         Returns:
             DataFrame: A DataFrame containing feature names and their permutation importances.
         """
-        perm_importance = permutation_importance(estimator, X, y)
+        perm_importance = permutation_importance(estimator, X, y, n_repeats=n_repeats)
         pi = pd.DataFrame()
         pi["feature"] = X.columns
         pi["perm_importance"] = perm_importance.importances_mean
