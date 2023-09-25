@@ -10,7 +10,7 @@
     - [FeatureSelector](#featureselector)
       - [Example Usage](#example-usage-2)
   - [K-Means Clustering](#k-means-clustering)
-    - [`plot_elbow`](#plot_elbow)
+    - [plot\_elbow](#plot_elbow)
       - [Parameters](#parameters)
       - [Example Usage](#example-usage-3)
   - [Installation](#installation)
@@ -30,7 +30,7 @@ The project is organized as follows:
   - `kmeans.py`: Module for K-means clustering functions.
 
 - `Setup.py`: Python setup script for installing the library.
-- `environment.yaml`: Conda environment file for specifying dependencies.
+- `environment.`yml``: Conda environment file for specifying dependencies.
 
 ## Exploratory Data Analysis (EDA)
 
@@ -134,7 +134,7 @@ These classes and functions provide essential tools for preparing your data and 
 
 The `kmeans.py` module provides a function for performing K-Means clustering and visualizing the "elbow" method to determine the optimal number of clusters.
 
-### `plot_elbow`
+### plot_elbow
 
 The `plot_elbow` function helps in identifying the optimal number of clusters for K-Means clustering. It does so by fitting K-Means models to the data for a range of cluster numbers and plotting the inertia (within-cluster sum of squares) values.
 
@@ -167,10 +167,10 @@ You can install DataAnalysisLibrary using pip:
 pip install git+https://github.com/tooha289/DataAnalysisLibrary.git
 ```
 
-For Conda users, you can create a Conda environment using the provided `environment.yaml` file:
+For Conda users, you can create a Conda environment using the provided `environment.yml` file:
 
 ```
-conda env create -f environment.yaml
+conda env create -f environment.yml
 conda activate data-analysis-env
 ```
 
