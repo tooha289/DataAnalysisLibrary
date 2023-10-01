@@ -210,10 +210,10 @@ class FeatureSelector(object):
             if feature == "Intercept":
                 formula += "-1"
             if formula.find(find_str) != -1:
-                formula.replace(find_str, "")
+                formula = formula.replace(find_str, "")
             elif formula.find(feature) != -1:
-                formula.replace(feature, "")
-                
+                formula = formula.replace(feature, "")
+
             print("=" * 40)
             print("=" * 40)
 
