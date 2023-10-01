@@ -201,6 +201,7 @@ class FeatureSelector(object):
             if len(vif_df) < 1:
                 return
             feature, vif = vif_df.loc[0, :].values
+            print(feature, vif)
             if vif < 10:
                 print("The analysis ends because there are no VIF values exceeding 10.")
                 return
