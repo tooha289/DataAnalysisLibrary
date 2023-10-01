@@ -178,7 +178,7 @@ class FeatureSelector(object):
             variance_inflation_factor(X.values, i) for i in range(X.shape[1])
         ]
         vif = vif.sort_values("VIF Factor", ascending=False)
-        vif.reset_index(drop=True)
+        vif.reset_index(drop=True, inplace=True)
         return vif
 
     def vif_analysis(self, formula, dataframe):
