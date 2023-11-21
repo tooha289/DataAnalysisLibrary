@@ -267,7 +267,7 @@ class DataAnalysisVisualizer:
             if annotation == True:
                 for p in ax.patches:
                     ax.annotate(
-                        f"{p.get_height():.d}",
+                        f"{int(p.get_height())}",
                         (p.get_x() + p.get_width() / 2.0, p.get_height()),
                         ha="center",
                         va="bottom",
